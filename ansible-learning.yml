@@ -38,3 +38,17 @@ ssh-keygen -t rsa
 Enter file in which to save the key (/c/Users/TheCarver/.ssh/id_rsa): ansible
 Enter passphrase (empty for no passphrase): 
 Enter same passphrase again: 
+
+#git config
+git config --global user.email "micahacosta51@gmail.com"
+git config --global user.name "TheCarver-254"
+
+
+#configuring the github repositpory 
+echo "# ansible-learning" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:TheCarver-254/ansible-learning.git
+git push -u origin main
