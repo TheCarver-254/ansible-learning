@@ -1,0 +1,40 @@
+#generating ssh keys
+ssh-keygen -t ed25519 -C "this is a comment"
+
+#to view the public key
+cat ./ssh/id_ed25519.pub
+
+#to view the private  key
+cat ./ssh/id_ed25519
+
+#copy ssh key to a server 
+# note: for this to work, you must first be able to ssh into the server itself  (172.16.250.133)
+#copy to all the servers in scope
+ssh-copy-id -i ./ssh/id_ed25519.pub 172.16.250.133 
+#validate that the key has been copied
+ls-la .ssh
+cat .ssh/authorized_keys
+
+
+#ssh into the first machine
+#you must be at the folder where the ssh key is located
+ssh 172.16.250.133
+
+
+#example: generate an ssh key for ansible : 
+ssh-keygen -t ed25519 -C "Ansible SSH Key"
+#if you're asked for the location to save the key : enter the location eg /home/thecarver/.ssh/ansible
+#skip the passpharase for the ansible key
+
+#copy the key to each of the servers
+ssh-copy-id -i ./ssh/ansible.pub 172.16.250.133 
+
+#try to ssh into the serve using the key
+ssh -i ~/./ssh/ansible 172.16.250.133 
+
+#git-bash git ssh setup
+ssh-keygen -t rsa
+#//Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/TheCarver/.ssh/id_rsa): ansible
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
