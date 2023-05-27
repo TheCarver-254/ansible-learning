@@ -32,12 +32,27 @@ ssh-copy-id -i ./ssh/ansible.pub 172.16.250.133
 #try to ssh into the serve using the key
 ssh -i ~/./ssh/ansible 172.16.250.133 
 
-#git-bash git ssh setup
-ssh-keygen -t rsa
-#//Generating public/private rsa key pair.
-Enter file in which to save the key (/c/Users/TheCarver/.ssh/id_rsa): ansible
+#git-bash git ssh setup on windows
+
+cd ~/.ssh  #cd into the ~./ssh directoy
+ssh-keygen #generate ssh key
+
+cd ~/.ssh && ssh-keygen # the above 2 commands into one
+cat id_rsa.pub | clip
+
+#//Generating public/private rsa key pair leave everything as default
+Enter file in which to save the key (/c/Users/TheCarver/.ssh/id_rsa): 
 Enter passphrase (empty for no passphrase): 
 Enter same passphrase again: 
+
+ 
+ls #ls into ~/.ssh to see if your keys have been generated
+
+cat id_rsa.pub | clip #copy the key to the clipboard and paste it into github
+
+
+cd ~/OneDrive/Documents/'2023 Scripts'/DevOps/ansible-learning # cd back to yoour code directory
+
 
 #git config
 git config --global user.email "micahacosta51@gmail.com"
@@ -52,3 +67,5 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin git@github.com:TheCarver-254/ansible-learning.git
 git push -u origin main
+
+
