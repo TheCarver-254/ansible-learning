@@ -1,0 +1,58 @@
+#anisible adhoc commands
+nano ansible.cfg #create an anisble config file
+#inside the anisble.cfg
+[defaults]
+inventory = inventory
+private_key_file = ~/.ssh/ansible
+
+#test the config file : if anisble will pick the parameters there
+ansible all -m ping #m is for module
+
+#save in nano
+ctrl + O
+ctrl + x
+
+
+ansible all --list-hosts
+ansible all -m gather_facts
+ansible all -m gather_facts --limit 172.16.250.132
+
+
+#running ansible elevated ad hoc commands
+#eg install vim-nox on all the servers
+ansible all -m apt -a name=vim-nox --become --ask-become-pass #-m is for module & -a for argument
+
+#egupgrade all servers to latest
+ansible all -m apt -a "upgrade=dist" --become --ask-become-pass
+
+
+#writing your first Ansible Playbook
+#writing ansible playbooks
+#name our playbook : install_apache.yml
+---
+- hosts: all
+  become: true
+  tasks: #plays
+
+  - name: update repository index # a play to : update repository index
+    apt:
+      update_cache: yes
+  - name: install apache2 package #task to install apache2 #a single task is called a Play
+    apt:
+      name: apache2
+      state: latest #make sure each time the playbook is run, the packages are the latest 
+
+  - name: add php support fpr apache
+    apt:
+      name: libapache2-mod-php
+      state: latest #make sure the package is the latest version available
+      #changing the state from:  latest to absent will remove/uninstall the package
+
+
+    
+      
+
+
+
+#to run our playbook
+ansible-playbook --ask-become-pass install_apache.yml

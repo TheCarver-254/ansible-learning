@@ -33,6 +33,9 @@ ssh-copy-id -i ./ssh/ansible.pub 172.16.250.133
 ssh -i ~/./ssh/ansible 172.16.250.133 
 
 #git-bash git ssh setup on windows
+#link : https://medium.com/devops-with-valentine/2021-how-to-set-up-your-ssh-key-for-github-on-windows-10-afe6e729a3c0
+#link 2 : https://stackoverflow.com/questions/2643502/git-how-to-solve-permission-denied-publickey-error-when-using-git
+
 
 cd ~/.ssh  #cd into the ~./ssh directoy
 ssh-keygen #generate ssh key
@@ -68,4 +71,19 @@ git branch -M main
 git remote add origin git@github.com:TheCarver-254/ansible-learning.git
 git push -u origin main
 
+
+#list default git configurations
+git config -l
+
+
+
+#working with the Python venv
+python3 venv ~/.myvenv #create the venv
+pyhthon3 source /~.myvenv/bin/activate #activate the vevn
+deactivate #deactivate the venv
+
+
+#Install Ansible : the linux way
+sudo apt update
+sudo apt install ansible
 
