@@ -34,25 +34,28 @@ ansible all -m apt -a "upgrade=dist" --become --ask-become-pass
   become: true
   tasks: #plays
 
-  - name: update repository index # a play to : update repository index
+#play for Ubuntu
+  - name: install apache2 package and add php support for apache #task to install apache2 & php packages #a single task is called a Play
     apt:
-      update_cache: yes
-  - name: install apache2 package #task to install apache2 #a single task is called a Play
-    apt:
-      name: apache2
+      name: 
+        - mapache2
+        - libapache2-mod-php      
       state: latest #make sure each time the playbook is run, the packages are the latest 
-
-  - name: add php support fpr apache
-    apt:
-      name: libapache2-mod-php
-      state: latest #make sure the package is the latest version available
+      update_cache: yes # a play to : update repository index
+    when: ansible_distribution == "Ubuntu" #when: ansible_distribution in ["Ubuntu" , "Debian"]
       #changing the state from:  latest to absent will remove/uninstall the package
 
 
-    
-      
-
-
+#play for CentOS
+  - name: install apache2 package and add php support for apache #task to install apache2 & php packages #a single task is called a Play
+    apt:
+      name: 
+        - httpd
+        - php   
+      state: latest #make sure each time the playbook is run, the packages are the latest 
+      update_cache: yes # a play to : update repository index
+    when: ansible_distribution == "Ubuntu" #when: ansible_distribution in ["Ubuntu" , "Debian"]
+      #changing the state from:  latest to absent will remove/uninstall the package
 
 #to run our playbook
 ansible-playbook --ask-become-pass install_apache.yml

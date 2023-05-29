@@ -87,3 +87,9 @@ deactivate #deactivate the venv
 sudo apt update
 sudo apt install ansible
 
+#mkdir test && cd test
+
+#ping a list of IPs in the ansible inventory file
+ansible --key-file ~/.ssh/ansible -i inventory -m ping
+
+

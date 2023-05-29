@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  tasks: #plays
+
+#play for Ubuntu & CentOS
+  - name: install apache package and add php 
+    package: #generic package manager for Ansible
+      name: 
+      #variables
+        - "{{ apache_package}}"
+        - "{{ php_package}}"    
+      state: latest 
+      update_cache: yes 
+
+#to run our playbook
+ansible-playbook --ask-become-pass install_apache.yml
