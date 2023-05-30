@@ -4,6 +4,7 @@
   pre_tasks:
 
   - name: install updates (CentOS)
+    tags: always
     dnf:
       update_only: yes
       update_cache: yes
@@ -11,6 +12,7 @@
 
 
   - name: install updates (Ubuntu)
+    tags: always
     apt:
       upgrade: dist
       update_cache: yes
@@ -22,6 +24,7 @@
   tasks: 
 
   - name: install apache2 package and add php support for apache (Ubuntu)
+    tags: apache,apache2,ubuntu
     apt:
       name: 
         - apache2
@@ -31,6 +34,7 @@
 
 
   - name: install apache2 package and add php support for apache  (CentOS)
+    tags: apache,centos,httpd
     dnf:
       name: 
         - httpd
@@ -45,6 +49,7 @@
   tasks: 
 
   - name: install mariadb package (Ubuntu)
+    tags: db, mariadb, ubuntu
     apt:
       name: 
         - mariadb-server   
@@ -53,6 +58,7 @@
 
 
   - name: install mariadb package (CentOS)
+    tags: centos,db,mariadb
     dnf:
       name: 
         - mariadb  
@@ -66,9 +72,10 @@
   tasks: 
 
   - name: install samba package (Ubuntu & CentOS)
+    tags: samba
     package:
       name: 
-        - Samba
+        - Samba  
       state: latest 
 
 #to run our playbook
