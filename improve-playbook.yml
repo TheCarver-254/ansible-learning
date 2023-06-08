@@ -10,8 +10,11 @@
       #variables
         - "{{ apache_package}}"
         - "{{ php_package}}"    
-      state: latest 
+      state: latest
       update_cache: yes 
 
+
+
 #to run our playbook
-ansible-playbook --ask-become-pass install_apache.yml
+#ansible-playbook --ask-become-pass install_apache.yml
+ansible-playbook --ask-become-pass improve-playbook.yml

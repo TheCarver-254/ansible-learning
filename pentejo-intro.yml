@@ -1,0 +1,20 @@
+anisble  - purpose is automation
+
+plays - single task
+
+1 play - install ngnx kwa rhel
+2 play ku update version ya ubuntu servers
+3 play -- db operations
+4 play ya user management
+
+playbook - combination of several plays
+
+inventory - define your hosts/ list of servers (ips or fqdn/namespace/domain name)
+
+
+modules - (help the plays to execute) -- managing
+
+role -- 
+
+ansible configuration file ~ ansible.cfg
+ .. you will define which inventory file to use
