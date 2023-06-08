@@ -1,0 +1,54 @@
+---
+#all hosts
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (CentOS)
+    tags: always
+    dnf:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+#all hosts
+- hosts: all
+  become: true
+  tasks:
+
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh public key "  #content for cat ~/.shh/ansible.pub
+
+
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh public key "  #content for cat ~/.shh/ansible.pub
+
+  - name: add sudoers file for simone
+    tags: always
+    copy:
+      src: sudoer_simone   #create this inside the files dir
+      dest: /etc/sudoers.d/simone 
+      owner: root
+      group: root
+      mode : 0440
+
+
+
+#to run our playbook
+#run the bootstrap.yml before the users-bootstrapping.yml
+ansible-playbook  --ask-become-pass bootstrap.yml
