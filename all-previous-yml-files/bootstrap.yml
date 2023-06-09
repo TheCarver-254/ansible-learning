@@ -32,12 +32,6 @@
       key: "ssh public key "  #content for cat ~/.shh/ansible.pub
 
 
-  - name: add ssh key for simone
-    tags: always
-    authorized_key:
-      user: simone
-      key: "ssh public key "  #content for cat ~/.shh/ansible.pub
-
   - name: add sudoers file for simone
     tags: always
     copy:

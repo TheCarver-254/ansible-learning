@@ -2,3 +2,13 @@
   authorized_key:
     user: simone
     key: "ssh public key "  #content for cat ~/.shh/ansible.pub
+
+#to double check this
+- name: add sudoers file for simone
+  tags: always
+  copy:
+    src: sudoer_simone   #create this inside the files dir
+    dest: /etc/sudoers.d/simone 
+    owner: root
+    group: root
+    mode : 0440
