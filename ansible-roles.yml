@@ -1,0 +1,81 @@
+---
+#all hosts
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (CentOS)
+    tags: always
+    dnf:
+      #update_only: yes #removed this bcos it will be handled by the bootstrap.yml
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      #upgrade: dist   #removed this bcos it will be handled by the bootstrap.yml
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "Ubuntu"
+
+
+#all hosts
+- hosts: all
+  become: true
+  roles:
+    - base
+
+
+#Workstations
+- hosts: Workstations
+  become: true
+  roles:
+    - workstations
+
+#Web Servers
+- hosts: web_servers
+  become: true
+  roles:
+    - web_servers
+
+
+
+#DB Servers
+- hosts: db_servers
+  become: true
+  roles:
+    - db_servers
+
+  
+#File Servers
+- hosts: file_servers
+  become: true
+  roles:
+    - file_servers
+
+  
+
+
+
+
+#to run our playbook
+#edit the ansible config file to always run using our user simone
+nano ansible.cfg
+#inside the cfg file add our user simone
+  inventory = inventory
+  private_key_file = ~/.ssh/ansible
+  remote_user =  simone #always run the playbook using this user
+
+ansible-playbook  ansible-roles.yml
+
+#to list all tags
+ansible-playbook --list-tags working-with-tags.yml
+
+#to target a list of servers with a particular tag
+ansible-playbook --tags centos --ask-become-pass working-with-tags.yml
+
+#to target a list of  tags
+ansible-playbook --tags "apache,db" --ask-become-pass working-with-tags.yml
